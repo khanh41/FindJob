@@ -4,6 +4,7 @@ from django.conf import settings
 from django.utils import timezone
 
 
+
 class Contact(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -19,7 +20,6 @@ JOB_TYPE = (
     ('Part Time', 'Part Time'),
     ('Full Time', 'Full Time'),
     ('Freelance', 'Freelancer'),
-    ('None', '---------'),
 )
 
 CATEGORY = (
@@ -62,7 +62,18 @@ class JobListing(models.Model):
 
     def get_absolute_url(self):
         return reverse("jobs:job-single", args=[self.id])
+    @property
+    def number_of_comments(self):
+        return JobComment.objects.filter(jobpost_connected=self).count()
 
+class JobComment(models.Model):
+    jobpost_connected = models.ForeignKey(JobListing, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, editable=False, blank=True)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return str(self.author) + ', ' + self.jobpost_connected.title[:40]
 
 class ApplyJob(models.Model):
     name = models.CharField(max_length=50)

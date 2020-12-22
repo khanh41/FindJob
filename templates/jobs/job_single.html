@@ -7,125 +7,176 @@
 
 
 {% block content %}
-    <!-- HOME -->
+<!-- HOME -->
+<style>
+    .user_name {
+        font-size: 14px;
+        font-weight: bold;
+    }
 
-    <section class="section-hero overlay inner-page bg-image"
-             style="background-image: url('{% static 'images/hero_1.jpg' %}');"
-             id="home-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
+    .comments-list .media {
+        border-bottom: 1px dotted #ccc;
+    }
+</style>
+
+<section class="home-section section-hero inner-page overlay bg-image"
+    style="background-image: url('{% static 'images/hero_1.jpg' %}');" id="home-section">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12">
+                <div class="mb-5 text-center">
                     <h1 class="text-white font-weight-bold">{{ q.title }}</h1>
+                    <p>Find your dream jobs in our powerful NGV website .</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-
-    <section class="site-section">
-        <div class="container">
-            <div class="row align-items-center mb-5">
-                <div class="col-lg-8 mb-4 mb-lg-0">
-                    <div class="d-flex align-items-center">
-                        <div class="border p-2 d-inline-block mr-3 rounded">
-                            <img src="{% static 'images/featured-listing-2.jpg' %}"
-                                 alt="Free Website Template By Free-Template.co">
-                        </div>
+<section class="site-section mb-0 pb-1">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <div class="d-flex align-items-center">
+                    <div class="border p-2 d-inline-block mr-3 rounded">
+                        <img src="{% static 'images/featured-listing-2.jpg' %}"
+                            alt="Free Website Template By Free-Template.co">
+                    </div>
+                    <div>
+                        <h2>{{ q.title }}</h2>
                         <div>
-                            <h2>{{ q.title }}</h2>
-                            <div>
-                                <span class="ml-0 mr-2 mb-2"><span
-                                        class="icon-briefcase mr-2"></span>{{ q.company_name }}</span>
-                                <span class="m-2"><span class="icon-room mr-2"></span>{{ q.job_location }}</span>
-                                <span class="m-2"><span class="icon-clock-o mr-2"></span><span
-                                        class="text-primary"> {{ q.employment_status }}
-                      </span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row">
-
-                        <div class="col-6">
-                            <a href="{% url 'jobs:apply' %}" class="btn btn-block btn-primary btn-md">Apply Now</a>
+                            <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>{{ q.company_name
+                                }}</span>
+                            <span class="m-2"><span class="icon-room mr-2"></span>{{ q.job_location }}</span>
+                            <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary"> {{
+                                    q.employment_status }}
+                                </span></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="mb-5">
-                        <figure class="mb-5"><img src="{% static 'images/sq_img_3.jpg' %}"
-                                                  alt="Free Website Template by Free-Template.co"
-                                                  class="img-fluid rounded"></figure>
-                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
-                                class="icon-align-left mr-3"></span>Job
-                            Description</h3>
-                        <p>{{ q.description }}</p>
+            <div class="col-lg-4">
+                <div class="row">
+
+                    <div class="col-6">
+                        <a href="{% url 'jobs:apply' %}" class="btn btn-block btn-primary btn-md">Apply Now</a>
                     </div>
-                    <div class="mb-5">
-                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
-                                class="icon-rocket mr-3"></span>Responsibilities</h3>
-                        <ul class="list-unstyled m-0 p-0">
-                            <li class="d-flex align-items-start mb-2"><span
-                                    class="icon-check_circle mr-2 text-muted"></span><span>{{ q.responsibilities }}</span>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                    <div class="mb-5">
-                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-book mr-3"></span>Experience
-                        </h3>
-                        <ul class="list-unstyled m-0 p-0">
-                            <li class="d-flex align-items-start mb-2"><span
-                                    class="icon-check_circle mr-2 text-muted"></span><span>{{ q.experience }}</span>
-                            </li>
-
-                        </ul>
-                    </div>
-
-
-                </div>
-                <div class="col-lg-4">
-                    <div class="bg-light p-3 border rounded mb-4">
-                        <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
-                        <ul class="list-unstyled pl-3 mb-0">
-                            <li class="mb-2"><strong class="text-black">Published
-                                on:</strong> {{ q.published_on|timesince }} ago
-                            </li>
-                            <li class="mb-2"><strong class="text-black">Vacancy:</strong> {{ q.vacancy }}</li>
-                            <li class="mb-2"><strong class="text-black">Employment
-                                Status:</strong> {{ q.employment_status }}</li>
-                            <li class="mb-2"><strong class="text-black">Experience:</strong> {{ q.experience }}</li>
-                            <li class="mb-2"><strong class="text-black">Job Location:</strong> {{ q.job_location }}</li>
-                            <li class="mb-2"><strong class="text-black">Salary:</strong> {{ q.Salary }}</li>
-                            <li class="mb-2"><strong class="text-black">Gender:</strong> {{ q.gender }}</li>
-                            <li class="mb-2"><strong class="text-black">Application
-                                Deadline:</strong> {{ q.application_deadline }}</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-light p-3 border rounded">
-                        <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
-                        <div class="px-3">
-                            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
-                            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
-                            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
-                            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
-    </section>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="mb-5">
+                    <figure class="mb-5"><img src="{% static 'images/sq_img_3.jpg' %}"
+                            alt="Free Website Template by Free-Template.co" class="img-fluid rounded"></figure>
+                    <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
+                            class="icon-align-left mr-3"></span>Job
+                        Description</h3>
+                    <p>{{ q.description }}</p>
+                </div>
+                <div class="mb-5">
+                    <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
+                            class="icon-rocket mr-3"></span>Responsibilities</h3>
+                    <ul class="list-unstyled m-0 p-0">
+                        <li class="d-flex align-items-start mb-2"><span
+                                class="icon-check_circle mr-2 text-muted"></span><span>{{ q.responsibilities }}</span>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="mb-5">
+                    <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
+                            class="icon-briefcase mr-3"></span>Experience
+                    </h3>
+                    <ul class="list-unstyled m-0 p-0">
+                        <li class="d-flex align-items-start mb-2"><span
+                                class="icon-check_circle mr-2 text-muted"></span><span>{{ q.experience }}</span>
+                        </li>
+
+                    </ul>
+                </div>
 
 
+            </div>
+            <div class="col-lg-4">
+                <div class="bg-light p-3 border rounded mb-4">
+                    <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
+                    <ul class="list-unstyled pl-3 mb-0">
+                        <li class="mb-2"><strong class="text-black">Published
+                                on:</strong> {{ q.published_on|timesince }} ago
+                        </li>
+                        <li class="mb-2"><strong class="text-black">Vacancy:</strong> {{ q.vacancy }}</li>
+                        <li class="mb-2"><strong class="text-black">Employment
+                                Status:</strong> {{ q.employment_status }}</li>
+                        <li class="mb-2"><strong class="text-black">Experience:</strong> {{ q.experience }}</li>
+                        <li class="mb-2"><strong class="text-black">Job Location:</strong> {{ q.job_location }}</li>
+                        <li class="mb-2"><strong class="text-black">Salary:</strong> {{ q.Salary }}</li>
+                        <li class="mb-2"><strong class="text-black">Gender:</strong> {{ q.gender }}</li>
+                        <li class="mb-2"><strong class="text-black">Application
+                                Deadline:</strong> {{ q.application_deadline }}</li>
+                    </ul>
+                </div>
 
+                <div class="bg-light p-3 border rounded">
+                    <h3 class="text-primary mt-3 h5 pl-3 mb-3 ">Share</h3>
+                    <div class="px-3">
+                        <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
+                        <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
+                        <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
+                        <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-0 pb-5">
+    <div class="container card">
+        <div class="row card-body ">
+            <div class="col-md-4">
+
+                <ul class="list-unstyled m-0 p-0 text-center">
+                    {%if user.username%}
+                    <form action="" method="post">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            {{form.content}}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    {% else %}
+                    <button type="submit" class="btn btn-primary"><a style="color: aliceblue"
+                            href="{% url 'accounts:login' %}">Đăng nhập để bình luận</a></button>
+                    {% endif %}
+                </ul>
+
+            </div>
+            <div class="col-md-8">
+                <div class="page-header">
+
+                    <h1 class="d-flex justify-content-between align-items-center">
+                        <div><span class="icon-book mr-3"></span>Comments </div> <small class="text-secondary"
+                            style="font-size: large;">{{dem}} comment{%if dem > 1 %}s{% else %}{% endif %}</small>
+                    </h1>
+                </div>
+                <hr>
+                <div class="comments-list">
+                    {% for comment in q.comments.all %}
+                    <div class="media pt-3">
+                        <div class="media-body">
+                            <h3 class="media-heading user_name">{{comment.author}}</h3>
+                            <h4>{{comment.content|linebreaks}}</h4>
+                            <p><small>{{comment.date_posted}}</small></p>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div>
+                    </div>
+                </div>
+            </div>
+</section>
 {% endblock %}
-
-
-
-
