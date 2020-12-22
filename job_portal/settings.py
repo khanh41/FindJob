@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'accounts',
-    'jobs',
+    'jobs.apps.JobsConfig',
 
     'crispy_forms',
 ]
