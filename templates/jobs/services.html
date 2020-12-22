@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- HOME -->
+    <section class="home-section section-hero inner-page overlay bg-image"
+             style="background-image: url('{% static 'images/hero_1.jpg' %}');"
+
+    >
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+                    <div class="mb-5 text-center">
+                        <h1 class="text-white font-weight-bold">Our Services</h1>
+                        <p>Find your dream jobs in our powerful NGV website template.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="site-section services-section bg-light block__62849" id="next-section">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+                    <a href="service-single.html" class="block__16443 text-center d-block">
+                        <span class="custom-icon mx-auto"><span class="icon-paint-brush d-block"></span></span>
+                        <h3>Graphic Design</h3>
+                        <p>Graphic Design (thiết kế đồ họa) là nghệ thuật phối hợp các yếu tố hình ảnh, kiểu chữ, nhằm truyền tải đến người xem một thông điệp, một ý nghĩa nào đó.</p>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+                    <a href="service-single.html" class="block__16443 text-center d-block">
+                        <span class="custom-icon mx-auto"><span class="icon-perm_media d-block"></span></span>
+                        <h3>Marketing Strategy</h3>
+                        <p>Marketing Strategy là một kế hoạch tổng thể của doanh nghiệp để tiếp cận người tiêu dùng tiềm năng và biến họ thành khách hàng của các sản phẩm hay dịch vụ mà doanh nghiệp cung cấp.</p>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+                    <a href="service-single.html" class="block__16443 text-center d-block">
+                        <span class="custom-icon mx-auto"><span class="icon-globe d-block"></span></span>
+                        <h3>Web Developer</h3>
+                        <p>Web development chính là tạo ra các ứng dụng web có thể chạy được trên các trình duyệt web. </p>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+                    <a href="service-single.html" class="block__16443 text-center d-block">
+                        <span class="custom-icon mx-auto"><span class="icon-server d-block"></span></span>
+                        <h3>Network Engineering</h3>
+                        <p>Kỹ sư mạng là chuyên gia công nghệ có kỹ năng duy trì kết nối dữ liệu, thu âm, cuộc gọi, video và các dịch vụ mạng bao gồm mạng không dây.</p>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+                    <a href="service-single.html" class="block__16443 text-center d-block">
+                        <span class="custom-icon mx-auto"><span class="icon-mobile-phone d-block"></span></span>
+                        <h3>Mobile Developer</h3>
+                        <p>Mobile developer tạo ra những ứng dụng được xây dựng và phát triển trên các nền tảng hệ điều hành của điện thoại khác nhau.</p>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+                    <a href="service-single.html" class="block__16443 text-center d-block">
+                        <span class="custom-icon mx-auto"><span class="icon-plug d-block"></span></span>
+                        <h3>IT Security</h3>
+                        <p class="d-sm-block">IT Security ngăn chặn các mối đe dọa độc hại và các vi phạm an ninh tiềm ẩn có thể gây ra tác động xấu lớn đến tổ chức.</p>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section class="bg-white pt-5 testimony-full">
+
+        <div class="owl-carousel single-carousel">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <img class="img-fluid mx-auto" src="{% static 'images/person_1.jpg' %}" alt="Image">
+                        <blockquote>
+                            <p>&ldquo;Life is better together.&rdquo;</p>
+                            <p><cite> &mdash; Quang Van</cite></p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <img class="img-fluid mx-auto" src="{% static 'images/person_2.jpg' %}" alt="Image">
+                        <blockquote>
+                            <p>&ldquo;Mèo meo meo mẻo meo.&rdquo;</p>
+                            <p><cite> &mdash; Meo meo</cite></p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+{% endblock %}
