@@ -29,17 +29,17 @@ def home(request):
         'query': qs,
         'job_qs': jobs_count,
         'company_name': company_count,
-        'nav' : 'home'
+        'nav': 'home'
     }
     return render(request, "home.html", context)
 
 
 def about_us(request):
-    return render(request, "jobs/about_us.html", {'nav' : 'about_us'})
+    return render(request, "jobs/about_us.html", {'nav': 'about_us'})
 
 
 def service(request):
-    return render(request, "jobs/services.html", {'nav' : 'services'})
+    return render(request, "jobs/services.html", {'nav': 'services'})
 
 
 def contact(request):
@@ -119,11 +119,14 @@ class SearchView(ListView):
     model = JobListing
     template_name = 'jobs/search.html'
     context_object_name = 'jobs'
-
+    print("aaaaa")
     def get_queryset(self):
         print(self.request.GET['title'])
         print(self.request.GET['job_location'])
         print(self.request.GET['employment_status'])
+        employment_status_icontains = self.request.GET['employment_status']
+        if employment_status_icontains == "---------":
+            employment_status_icontains = ""
         return self.model.objects.filter(title__icontains=self.request.GET['title'],
-                                      job_location__icontains=self.request.GET['job_location'],
-                                      employment_status__icontains=self.request.GET['employment_status'])
+                                         job_location__icontains=self.request.GET['job_location'],
+                                         employment_status__icontains=employment_status_icontains)

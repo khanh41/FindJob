@@ -19,6 +19,7 @@ JOB_TYPE = (
     ('Part Time', 'Part Time'),
     ('Full Time', 'Full Time'),
     ('Freelance', 'Freelancer'),
+    ('None', '---------'),
 )
 
 CATEGORY = (
