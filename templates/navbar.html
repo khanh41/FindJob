@@ -6,7 +6,7 @@
         <div class="row align-items-center mt-0 pt-0">
             <div class="site-logo col-6 ">
                 <a href="{% url 'home' %}">
-                    {#                    <img src="{% static 'images/logo_ngv.png' %}" alt="">#}
+                    {# <img src="{% static 'images/logo_ngv.png' %}" alt="">#}
                     NGV
                 </a>
             </div>
@@ -16,13 +16,19 @@
                     <li><a href="{% url 'home' %}" class="nav-link {% if nav == 'home' %}active{% endif %}">Home</a>
                     </li>
                     <li><a href="{% url 'jobs:job-listing' %}"
-                           class="nav-link {% if nav == 'job_listing' %}active{% endif %}">Job Listings</a></li>
-                    <li><a href="{% url 'jobs:about' %}" class="nav-link {% if nav == 'about_us' %}active{% endif %}">About
-                        us</a></li>
-                    <li><a href="{% url 'jobs:contact' %}" class="nav-link {% if nav == 'contact' %}active{% endif %}">Contact</a>
+                            class="nav-link {% if nav == 'job_listing' %}active{% endif %}">Job Listings</a></li>
+                    <li><a href="{% url 'jobs:about' %}"
+                            class="nav-link {% if nav == 'about_us' %}active{% endif %}">About
+                            us</a></li>
+                    <li><a href="{% url 'jobs:contact' %}"
+                            class="nav-link {% if nav == 'contact' %}active{% endif %}">Contact</a>
                     </li>
                     <li><a href="{% url 'jobs:service' %}" class="nav-link {% if nav == 'services' %}active{% endif %}">
-                        Services</a></li>
+                            Services</a></li>
+                    <li><a href="{% url 'jobs:job-static' %}"
+                            class="nav-link {% if nav == 'job_static' %}active{% endif %}">
+                            Job Static</a></li>
+
 
                     <li class="d-lg-none"><a href="#">Contact Us</a></li>
                 </ul>
@@ -31,17 +37,18 @@
             <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
                 <div class="ml-auto">
                     {% if user.is_authenticated %}
-                        <form class="form-inline my-2 my-lg-0">
-                            <a class="nav-link btn my-2 my-sm-0" style="color: aliceblue">Hi {{ user.username }}!</a>
-                            <a class="nav-link btn btn-danger my-2 my-sm-0 mx-2" href="{% url 'accounts:logout' %}">Log
-                                Out</a>
-                        </form>
+                    <form class="form-inline my-2 my-lg-0">
+                        <a class="nav-link btn my-2 my-sm-0" style="color: aliceblue">Hi {{ user.username }}!</a>
+                        <a class="nav-link btn btn-danger my-2 my-sm-0 mx-2" href="{% url 'accounts:logout' %}">Log
+                            Out</a>
+                    </form>
                     {% else %}
-                        <form class="form-inline my-2 my-lg-0">
-                            <a class="nav-link btn my-2 my-sm-0" style="color: aliceblue" href="{% url 'accounts:login' %}">Đăng nhập</a>
-                            <a class="nav-link btn btn-danger my-2 my-sm-0 mx-2" href="{% url 'accounts:signup' %}">Đăng
-                                ký</a>
-                        </form>
+                    <form class="form-inline my-2 my-lg-0">
+                        <a class="nav-link btn my-2 my-sm-0" style="color: aliceblue"
+                            href="{% url 'accounts:login' %}">Đăng nhập</a>
+                        <a class="nav-link btn btn-danger my-2 my-sm-0 mx-2" href="{% url 'accounts:signup' %}">Đăng
+                            ký</a>
+                    </form>
 
                     {% endif %}
                 </div>
