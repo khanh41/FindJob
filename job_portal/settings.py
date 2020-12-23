@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,7 +36,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'accounts',
-    'jobs.apps.JobsConfig',
+    'jobs',
 
     'crispy_forms',
 ]
@@ -85,13 +84,10 @@ DATABASES = {
         'NAME': 'jobportal',
         'USER':'postgres',
         'PASSWORD': '1',
-        'HOST' : '192.168.1.159'
+        #'HOST': '192.168.1.159'
+
     }
 }
-
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 #DATABASES['default']['CONN_MAX_AGE'] = 500
 
 
@@ -146,6 +142,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 ALLOWED_HOSTS = ['*']
 
 
-django_heroku.settings(locals())
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 

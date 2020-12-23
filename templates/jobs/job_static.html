@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+<!-- HOME -->
+<section class="home-section section-hero inner-page overlay bg-image"
+    style="background-image: url('{% static 'images/hero_1.jpg' %}');">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12">
+                <div class="mb-5 text-center">
+                    <h1 class="text-white font-weight-bold">Job Staic</h1>
+                    <p>Find your dream jobs in our powerful NGV website template.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="site-section services-section bg-light block__62849" id="next-section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-6 col-md-6 col-lg-6 mb-6 mb-lg-6">
+                <a class="block__16443 text-center d-block">
+                    <span class="custom-icon mx-auto"><span class="icon-paint-brush d-block"></span></span>
+                    <h3>Biểu đồ trung bình lương trong khu vực</h3>
+                    <canvas id="cholam_luong" width="400" height="400"></canvas>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-6 mb-6 mb-lg-6">
+                <a class="block__16443 text-center d-block">
+                    <span class="custom-icon mx-auto"><span class="icon-paint-brush d-block"></span></span>
+                    <h3>Biểu đồ số lượng công việc trong khu vực</h3>
+                    <canvas id="cholam" width="400" height="400"></canvas>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-6 mb-6 mb-lg-6">
+                <a class="block__16443 text-center d-block">
+                    <span class="custom-icon mx-auto"><span class="icon-paint-brush d-block"></span></span>
+                    <h3>Biểu đồ số lượng công việc theo thời gian</h3>
+                    <canvas id="kieulam" width="400" height="400"></canvas>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-6 mb-6 mb-lg-6">
+                <a class="block__16443 text-center d-block">
+                    <span class="custom-icon mx-auto"><span class="icon-paint-brush d-block"></span></span>
+                    <h3>Biểu đồ số lượng từng công việc</h3>
+                    <canvas id="loainghe" width="400" height="400"></canvas>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-6 mb-6 mb-lg-6">
+                <a class="block__16443 text-center d-block">
+                    <span class="custom-icon mx-auto"><span class="icon-paint-brush d-block"></span></span>
+                    <h3>Biểu đồ tăng trường số lượng công việc theo thời gian</h3>
+                    <canvas id="tangtruongnghe" width="400" height="400"></canvas>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-6 mb-6 mb-lg-6">
+                <a class="block__16443 text-center d-block">
+                    <span class="custom-icon mx-auto"><span class="icon-paint-brush d-block"></span></span>
+                    <h3>Biểu đồ tăng trưởng lương theo thời gian</h3>
+                    <canvas id="tangtruongluong" width="400" height="400"></canvas>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+<section class="bg-white pt-5 testimony-full">
+
+    <div class="owl-carousel single-carousel">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <img class="img-fluid mx-auto" src="{% static 'images/person_1.jpg' %}" alt="Image">
+                    <blockquote>
+                        <p>&ldquo;Life is better together.&rdquo;</p>
+                        <p><cite> &mdash; Quang Van</cite></p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <img class="img-fluid mx-auto" src="{% static 'images/person_2.jpg' %}" alt="Image">
+                    <blockquote>
+                        <p>&ldquo;Mèo meo meo mẻo meo.&rdquo;</p>
+                        <p><cite> &mdash; Meo meo</cite></p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+    function draw_bar(data_visual, id) {
+
+        var barData = {
+            labels: data_visual[0],
+            datasets: [
+                {
+
+                    fillColor: "#48A497",
+                    strokeColor: "#48A4D1",
+                    data: data_visual[1]
+                }
+            ]
+        }
+        // get bar chart canvas
+        var income = document.getElementById(id).getContext("2d");
+        // draw bar chart
+        new Chart(income).Bar(barData);
+    }
+
+    function draw_line(data_visual, id) {
+        var barData = {
+            labels: data_visual[0],
+            datasets: [
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: data_visual[1]
+                }
+            ]
+        }
+        // get bar chart canvas
+        var income = document.getElementById(id).getContext("2d");
+        // draw bar chart
+        new Chart(income).Line(barData);
+    }
+    draw_bar({{ kieu_lam | safe }}, "kieulam");
+    draw_bar({{ cho_lam | safe }}, "cholam");
+    draw_bar({{ loai_nghe | safe }}, "loainghe");
+    draw_bar({{ cho_lam_luong | safe }}, "cholam_luong");
+
+    draw_line({{ tong_nghe | safe }}, "tangtruongnghe");
+    draw_line({{ tong_luong | safe }}, "tangtruongluong");
+
+
+</script>
+
+{% endblock %}

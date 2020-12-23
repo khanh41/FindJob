@@ -5,6 +5,7 @@ admin.site.register(Contact)
 admin.site.register(JobListing)
 admin.site.register(ApplyJob)
 
+admin.site.register(JobComment)
 
 class JobListingAdmin(admin.ModelAdmin):
     list_display = ('title', 'user')
@@ -15,3 +16,7 @@ class JobListingAdmin(admin.ModelAdmin):
             obj.user = request.user
             obj.save()
 
+class JobCommentAdmin(admin.ModelAdmin):
+    list_display = ('author', 'content', 'date_posted')
+    
+            

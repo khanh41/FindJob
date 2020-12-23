@@ -31,7 +31,8 @@ for i in range(100):
         a["fields"]["job_location"] = location[random.randint(0,3)]
         a["fields"]["employment_status"] = employment_status[random.randint(0,2)]
         a["fields"]["gender"] = gender[random.randint(0,2)]
-        a["fields"]["Salary"] = str(random.randint(100,1000)) + "$"
+        a["fields"]["Salary"] = str(random.randint(100,1000))
+        a["fields"]["application_deadline"] = str(random.randint(2018,2020)) + "-" + str(random.randint(1,12)) + "-" + str(random.randint(1,25)) + "T00:00:00Z"
     luu.append(copy.deepcopy(a))
 
 

@@ -14,7 +14,8 @@ urlpatterns = [
     path('job-single/<int:id>/', job_single, name='job-single'),
     path('search/', SearchView.as_view(), name='search'),
     path('apply/', apply_job, name='apply'),
-
+    path("job-static/", job_static, name="job-static"),
+    #path()
 
 
 ]

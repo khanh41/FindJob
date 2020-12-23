@@ -23,7 +23,9 @@
                     </li>
                     <li><a href="{% url 'jobs:service' %}" class="nav-link {% if nav == 'services' %}active{% endif %}">
                         Services</a></li>
-
+                    <li><a href="{% url 'jobs:job-static' %}"
+                            class="nav-link {% if nav == 'job_static' %}active{% endif %}">
+                            Job Static</a></li>
                     <li class="d-lg-none"><a href="#">Contact Us</a></li>
                 </ul>
             </nav>

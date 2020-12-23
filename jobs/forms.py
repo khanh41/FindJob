@@ -18,6 +18,24 @@ class ContactForm(forms.ModelForm):
             'message'
         ]
 
+class CommentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author', None)
+        self.jobpost_connected = kwargs.pop('jobpost_connected', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        comment = super().save(commit=False)
+        comment.author = self.author
+        comment.jobpost_connected = self.jobpost_connected
+        comment.save()
+
+    class Meta:
+        model = JobComment
+        fields = ['content']
+        widgets = {
+            'parameters': forms.Textarea(attrs={'cols': 30, 'rows': 5}),
+         }
 
 class JobListingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -26,19 +44,7 @@ class JobListingForm(forms.ModelForm):
         self.fields['Salary'].widget.attrs['placeholder'] = '1k USD/month'
         self.fields['title'].widget.attrs['placeholder'] = 'Software Engineer, Web Designer'
         self.fields['application_deadline'].widget.attrs['placeholder'] = '2020-12-27'
-        self.fields['title'].required = False
-        self.fields['company_name'].required = False
-        self.fields['employment_status'].required = False
-        self.fields['vacancy'].required = False
-        self.fields['gender'].required = False
-        self.fields['category'].required = False
-        self.fields['description'].required = False
-        self.fields['responsibilities'].required = False
-        self.fields['experience'].required = False
-        self.fields['job_location'].required = False
-        self.fields['Salary'].required = False
-        self.fields['application_deadline'].required = False
-        self.fields['published_on'].required = False
+
     class Meta:
         model = JobListing
         exclude = ('user', 'image')

@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.views.generic import ListView
+from django.http import HttpResponseRedirect
 
 
 def home(request):
@@ -94,9 +95,18 @@ def job_post(request):
 def job_single(request, id):
     job_query = get_object_or_404(JobListing, id=id)
 
+    form = CommentForm()
+    dem = job_query.number_of_comments
+    if request.method == "POST":
+        form = CommentForm(request.POST, author=request.user, jobpost_connected=job_query)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.path)
     context = {
+        'form': form,
         'q': job_query,
-        'nav': 'job_listing'
+        'nav': 'job_listing',
+        'dem': dem
     }
     return render(request, "jobs/job_single.html", context)
 
@@ -119,14 +129,73 @@ class SearchView(ListView):
     model = JobListing
     template_name = 'jobs/search.html'
     context_object_name = 'jobs'
-    print("aaaaa")
+
     def get_queryset(self):
         print(self.request.GET['title'])
         print(self.request.GET['job_location'])
         print(self.request.GET['employment_status'])
-        employment_status_icontains = self.request.GET['employment_status']
-        if employment_status_icontains == "---------":
-            employment_status_icontains = ""
         return self.model.objects.filter(title__icontains=self.request.GET['title'],
                                          job_location__icontains=self.request.GET['job_location'],
-                                         employment_status__icontains=employment_status_icontains)
+                                         employment_status__icontains=self.request.GET['employment_status'])
+
+
+def count_list(data, check):
+    if len(check) == 0:
+        check = len(data) * [1]
+    set_data = set(data)
+    dict_data = {}
+    for i in set_data:
+        dict_data[i] = 0
+    for x in set_data:
+        for i in range(len(data)):
+            if data[i] == x:
+                dict_data[x] += check[i]
+    return [list(dict_data.keys()), list(dict_data.values())]
+
+
+def job_static(request):
+    template_name = "jobs/job_static.html"
+    kieu_lam = []
+    loai_nghe = []
+    cho_lam = []
+    luong = []
+    time = []
+    for i in JobListing.objects.values_list():
+        kieu_lam.append(i[4])
+        loai_nghe.append(i[2])
+        cho_lam.append(i[11])
+        luong.append(int(i[12]))
+        time.append(str(i[14].month) + "/" + str(i[14].year))
+
+    tong_nghe_response = count_list(time, [])
+    tong_luong_response = count_list(time, luong)
+
+    kieu_lam_response = count_list(kieu_lam, [])
+    loai_nghe_response = count_list(loai_nghe, [])
+    cho_lam_response = count_list(cho_lam, [])
+    set_data = set(cho_lam)
+    dict_data = {}
+    for i in set_data:
+        dict_data[i] = 0
+    for x in set_data:
+        count = 0
+        for i in range(len(cho_lam)):
+            if cho_lam[i] == x:
+                dict_data[x] += luong[i]
+                count += 1
+        dict_data[x] /= count
+    cho_lam_luong_response = [
+        list(dict_data.keys()),
+        list(dict_data.values()),
+    ]
+    temp = list(zip(*sorted(zip(tong_nghe_response[0], tong_nghe_response[1]), key=lambda x: int(x[0].split("/")[0]) + 100 * int(x[0].split("/")[1]))))
+    temp2 = list(zip(*sorted(zip(tong_luong_response[0], tong_luong_response[1]), key=lambda x: int(x[0].split("/")[0]) + 100 * int(x[0].split("/")[1]))))
+    context = {
+        "kieu_lam": kieu_lam_response,
+        "cho_lam": cho_lam_response,
+        "loai_nghe": loai_nghe_response,
+        "cho_lam_luong": cho_lam_luong_response,
+        "tong_nghe": [list(temp[0]),list(temp[1])],
+        "tong_luong": [list(temp2[0]),list(temp2[1])]
+    }
+    return render(request, template_name, context)
