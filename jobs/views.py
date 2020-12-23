@@ -81,6 +81,13 @@ def job_listing(request):
 @login_required
 def job_post(request):
     form = JobListingForm(request.POST or None)
+
+    form.fields['vacancy'].required = False
+    form.fields['description'].required = False
+    form.fields['experience'].required = False
+    form.fields['published_on'].required = False
+    form.fields['Salary'].required = True
+
     if form.is_valid():
         instance = form.save()
         instance.save()
@@ -196,6 +203,7 @@ def job_static(request):
         "loai_nghe": loai_nghe_response,
         "cho_lam_luong": cho_lam_luong_response,
         "tong_nghe": [list(temp[0]),list(temp[1])],
-        "tong_luong": [list(temp2[0]),list(temp2[1])]
+        "tong_luong": [list(temp2[0]),list(temp2[1])],
+        'nav' : 'job_static'
     }
     return render(request, template_name, context)
