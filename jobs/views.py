@@ -121,7 +121,7 @@ def job_single(request, id):
     return render(request, "jobs/job_single.html", context)
 
 
-@login_required
+@login_required 
 def apply_job(request):
     form = JobApplyForm(request.POST or None, request.FILES)
     if form.is_valid():

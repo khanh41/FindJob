@@ -9,13 +9,6 @@ django-crispy-forms==1.8.1
 django-forms-bootstrap==2.0.3.post2
 django-heroku==0.3.1
 gunicorn==20.0.4
-importlib-metadata==2.1.0
-olefile==0.46
-Pillow==6.2.1
-psycopg2 @ file:///C:/ci/psycopg2_1594305209841/work
-pytz==2019.3
-soupsieve==2.0.1
 sqlparse==0.4.1
+Pillow==6.2.1
 whitenoise==5.1.0
-wincertstore==0.2
-zipp==3.4.0
