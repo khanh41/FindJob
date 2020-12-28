@@ -19,13 +19,13 @@
                            class="nav-link {% if nav == 'job_listing' %}active{% endif %}">Job Listings</a></li>
                     <li><a href="{% url 'jobs:about' %}" class="nav-link {% if nav == 'about_us' %}active{% endif %}">About
                         us</a></li>
-                    <li><a href="{% url 'jobs:contact' %}" class="nav-link {% if nav == 'contact' %}active{% endif %}">Contact</a>
-                    </li>
                     <li><a href="{% url 'jobs:service' %}" class="nav-link {% if nav == 'services' %}active{% endif %}">
                         Services</a></li>
+                    <li><a href="{% url 'jobs:contact' %}" class="nav-link {% if nav == 'contact' %}active{% endif %}">Contact</a>
+                    </li>
                     <li><a href="{% url 'jobs:job-static' %}"
-                            class="nav-link {% if nav == 'job_static' %}active{% endif %}">
-                            Job Static</a></li>
+                           class="nav-link {% if nav == 'job_static' %}active{% endif %}">
+                        Job Static</a></li>
                     <li class="d-lg-none"><a href="#">Contact Us</a></li>
                 </ul>
             </nav>
@@ -40,7 +40,8 @@
                         </form>
                     {% else %}
                         <form class="form-inline my-2 my-lg-0">
-                            <a class="nav-link btn my-2 my-sm-0" style="color: aliceblue" href="{% url 'accounts:login' %}">Đăng nhập</a>
+                            <a class="nav-link btn my-2 my-sm-0" style="color: aliceblue"
+                               href="{% url 'accounts:login' %}">Đăng nhập</a>
                             <a class="nav-link btn btn-danger my-2 my-sm-0 mx-2" href="{% url 'accounts:signup' %}">Đăng
                                 ký</a>
                         </form>

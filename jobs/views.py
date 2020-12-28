@@ -42,7 +42,7 @@ def about_us(request):
 def service(request):
     return render(request, "jobs/services.html", {'nav': 'services'})
 
-
+@login_required
 def contact(request):
     form = ContactForm(request.POST or None)
     if form.is_valid():
@@ -159,7 +159,7 @@ def count_list(data, check):
                 dict_data[x] += check[i]
     return [list(dict_data.keys()), list(dict_data.values())]
 
-
+@login_required
 def job_static(request):
     template_name = "jobs/job_static.html"
     kieu_lam = []
