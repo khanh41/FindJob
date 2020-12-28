@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 
-
 {% load static %}
-
-
-
 
 {% block content %}
 <!-- HOME -->
@@ -136,47 +132,83 @@
 <section class="mt-0 pb-5">
     <div class="container card">
         <div class="row card-body ">
-            <div class="col-md-4">
-
-                <ul class="list-unstyled m-0 p-0 text-center">
-                    {%if user.username%}
-                    <form action="" method="post">
+            <div class="col-5">
+                <div class="m-0 p-0 text-center">
+                    {% if user.username %}
+                    <form action="" method="post" id="comment-form">
                         <div class="form-group">
                             {% csrf_token %}
-                            {{form.content}}
+                            {{ form.content }}
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                     {% else %}
                     <button type="submit" class="btn btn-primary"><a style="color: aliceblue"
-                            href="{% url 'accounts:login' %}">Đăng nhập để bình luận</a></button>
+                            href="{% url 'accounts:login' %}">Đăng nhập
+                            để bình luận</a></button>
                     {% endif %}
-                </ul>
+                </div>
 
             </div>
-            <div class="col-md-8">
+            <div class="col-7">
                 <div class="page-header">
 
                     <h1 class="d-flex justify-content-between align-items-center">
-                        <div><span class="icon-book mr-3"></span>Comments </div> <small class="text-secondary"
-                            style="font-size: large;">{{dem}} comment{%if dem > 1 %}s{% else %}{% endif %}</small>
+                        <div><span class="icon-book mr-3"></span>Comments</div>
+                        <small class="text-secondary" style="font-size: large;">{{ dem }} comment{% if dem > 1 %}s{%
+                            else %}{% endif %}</small>
                     </h1>
                 </div>
                 <hr>
-                <div class="comments-list">
+                <div class="comments-list" id="list-comment">
                     {% for comment in q.comments.all %}
                     <div class="media pt-3">
                         <div class="media-body">
-                            <h3 class="media-heading user_name">{{comment.author}}</h3>
-                            <h4>{{comment.content|linebreaks}}</h4>
-                            <p><small>{{comment.date_posted}}</small></p>
+                            <h3 class="media-heading user_name">{{ comment.author }}</h3>
+                            <h4>{{ comment.content|linebreaks }}</h4>
+                            <p><small>{{ comment.date_posted }}</small></p>
 
                         </div>
                     </div>
                     {% endfor %}
-                    <div>
-                    </div>
+
                 </div>
             </div>
+        </div>
+    </div>
 </section>
+{% block javascript %}
+<script>
+
+    $("#comment-form").submit(function (e) {
+        e.preventDefault();
+        var serializedData = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: "",
+            data: serializedData,
+            success: function (response) {
+
+                $("#comment-form").trigger('reset');
+
+                var instance = JSON.parse(response["instance"]);
+                var fields = instance[0]["fields"];
+                $("#list-comment div").prepend(
+                    `<div class="media pt-3">
+                        <div class="media-body">
+                            <h3 class="media-heading user_name">${fields['author'] ||""}</h3>
+                            <h4>${fields['content']||linebreaks }</h4>
+                            <p><small>${fields['date_posted']||"" }</small></p>
+
+                        </div>
+                    </div>`
+                )
+            },
+            error: function (response) {
+                alert(response["responseJSON"]["error"]);
+            }
+        })
+    })
+</script>
+{% endblock javascript %}
 {% endblock %}
