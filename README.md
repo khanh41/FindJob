@@ -15,9 +15,14 @@ http://ngvheroku.herokuapp.com/
 
 # Cài đặt
 >
->!git clone https://github.com/khanh41/TTCN.git
-    !cd TTCN
+>
+    !git clone https://github.com/khanh41/TTCN.git
+
+    %cd TTCN
+    
     !pip install -r requirement.txt
+    
     !psql -U postgres
     > create database jobportal;
+    
     !python manage.py runserver
